@@ -259,6 +259,7 @@ const NewBooking = () => {
                   <TextField
                       value={`${format(dates[0].startDate, "dd/MM/yyyy")}`}
                       readOnly
+                      disabled={true}
                       className="inputBox"
                       label="Check-in"
                       onClick={handleOpen}
@@ -269,6 +270,7 @@ const NewBooking = () => {
                   <TextField
                       value={`${format(dates[0].endDate, "dd/MM/yyyy")}`}
                       readOnly
+                      disabled={true}
                       className="inputBox"
                       label="Check-out"
                       onClick={handleOpen}

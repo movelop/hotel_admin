@@ -36,7 +36,7 @@ const Login = () => {
 
     return (
         <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
-            <div className="w-full p-6 m-auto bg-white dark:bg-secondary-dark-bg rounded-md shadow-md lg:max-w-xl">
+            <div className="w-[90%] md:w-[80%] p-6 m-auto bg-white dark:bg-secondary-dark-bg rounded-md shadow-md lg:max-w-xl">
                 <h1 className="text-3xl font-semibold text-center dark:text-gray-200 underline">
                    Sign in
                 </h1>
