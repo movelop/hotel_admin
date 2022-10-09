@@ -10,7 +10,7 @@ const BookingTable = ({ columns }) => {
     const location = useLocation();
     const path = location.pathname.split("/")[1];
 
-    const { data } = useFetch(`/api/${path}`);
+    const { data, loading } = useFetch(`/api/${path}`);
     
     useEffect(() => {
         setList(data);
@@ -92,6 +92,7 @@ const BookingTable = ({ columns }) => {
             rowsPerPageOptions={[9]}
             checkboxSelection
             getRowId={(row) => row._id}
+            loading={loading}
         /> 
     </div>
   )

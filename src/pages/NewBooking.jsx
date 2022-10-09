@@ -253,7 +253,7 @@ const NewBooking = () => {
             </div>
           </div>
           <div className="flex-[2] mt-5 lg:mt-0">
-            <form className='w-full md:flex md:flex-wrap md:gap-[30px] justify-around items-center'>
+            <form className='w-full md:flex md:flex-wrap md:gap-[30px] justify-between px-3'>
               <div className="lg:w-[45%] w-full mt-4 mb-4 md:mt-2 md:mb-2 flex gap-[1rem] items-center relative">
                 <div>
                   <TextField

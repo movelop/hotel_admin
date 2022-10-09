@@ -69,7 +69,7 @@ const NewRoom = () => {
             />
           </div>
           <div className="flex-[2] mt-5 lg:mt-0">
-            <form className='w-full md:flex md:flex-wrap md:gap-[30px] justify-around items-center'>
+            <form className='w-full md:flex md:flex-wrap md:gap-[30px] justify-between px-3'>
               <div className="w-[45%]">
                 <label htmlFor="file" className='flex items-center gap-10px text-xl font-semibold'>
                   Image: <DriveFolderUploadOutlinedIcon className="cursor-pointer" />

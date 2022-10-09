@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
-import { TextField } from '@mui/material';
+import { Checkbox, FormControlLabel, TextField } from '@mui/material';
 
 const EditUser = ({ item, setEdit }) => {
   const [file, setFile] = useState('');
   const [info, setInfo] = useState(item);
+  const [isAdmin, setIsAdmin] = useState(item.isAdmin);
   const navigate = useNavigate();
 
   const userInputs = [
@@ -57,6 +58,12 @@ const EditUser = ({ item, setEdit }) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   }
 
+  const handleSelect = (e) => {
+    const checked = e.target.checked;
+
+    checked ? setIsAdmin(true) : setIsAdmin(false);
+  }
+
   const handleClick = async(e) => {
     e.preventDefault();
     if(file) {
@@ -103,7 +110,7 @@ const EditUser = ({ item, setEdit }) => {
           />
         </div>
         <div className="flex-[2] mt-5 lg:mt-0">
-          <form className='w-full md:flex md:flex-wrap md:gap-[30px] justify-around items-center'>
+          <form className='w-full md:flex md:flex-wrap md:gap-[30px] justify-between px-3'>
             <div className="w-[45%]">
               <label htmlFor="file" className='flex items-center gap-10px text-xl font-semibold'>
                 Image: <DriveFolderUploadOutlinedIcon className="cursor-pointer" />
@@ -130,6 +137,18 @@ const EditUser = ({ item, setEdit }) => {
                 />
               </div>
             ))}
+            <div className='lg:w-[45%] w-full mt-4 mb-4 md:mt-0 md:mb-2'>
+                <FormControlLabel
+                    label="Admin"
+                    labelPlacement="start"
+                    control={
+                      <Checkbox
+                        checked = {isAdmin}
+                        onChange={handleSelect }
+                      />
+                    }
+                  />
+              </div>
             <div className="w-[100%] flex flex-row-reverse justify-start gap-[10px] lg:pr-4">
               <button className="py-[10px] px-[20px] text-white bg-teal-800 font-body cursor-pointer rounded-sm" onClick = {handleClick}>Send</button>
               <button className="py-[10px] px-[20px] text-white bg-red-400 font-body cursor-pointer rounded-sm" onClick = {() => setEdit(false)}>Cancel</button>
