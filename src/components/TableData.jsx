@@ -1,40 +1,59 @@
 import React from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { Link } from 'react-router-dom';
 
-import { tableData } from '../Data/dummy';
+import useFectch from '../hooks/useFetch';
 
 const TableData = () => {
-    
+  const { data } = useFectch('/api/bookings/latest');
+
+  console.log(data)
   return (
     <TableContainer component={Paper} className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg">
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell className="dark:text-gray-200">Tracking ID</TableCell>
-            <TableCell className="dark:text-gray-200">Product</TableCell>
-            <TableCell className="dark:text-gray-200">Customer</TableCell>
-            <TableCell className="dark:text-gray-200">Date</TableCell>
-            <TableCell className="dark:text-gray-200">Amount</TableCell>
-            <TableCell className="dark:text-gray-200">Payment Method</TableCell>
-            <TableCell className="dark:text-gray-200">Status</TableCell>
+            <TableCell className="dark:text-gray-200">Confirmation</TableCell>
+            <TableCell className="dark:text-gray-200">Fullname</TableCell>
+            <TableCell className="dark:text-gray-200">Email</TableCell>
+            <TableCell className="dark:text-gray-200">Phone Number</TableCell>
+            <TableCell className="dark:text-gray-200">Check-In Date</TableCell>
+            <TableCell className="dark:text-gray-200">Check-Out Date</TableCell>
+            <TableCell className="dark:text-gray-200">Payment Reference</TableCell>
+            <TableCell className="dark:text-gray-200">Room Type</TableCell>
+            <TableCell className="dark:text-gray-200">Room Number(s)</TableCell>
+            <TableCell className="dark:text-gray-200">Action</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {tableData.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell className="dark:text-gray-200">{row.id}</TableCell>
+          {data.map((row) => (
+            <TableRow key={row._id}>
+              <TableCell className="dark:text-gray-200">{row.confirmation}</TableCell>
+              <TableCell className="dark:text-gray-200">{`${row.lastname} ${row.firstname}`}</TableCell>
+              <TableCell className="dark:text-gray-200">{row.email}</TableCell>
+              <TableCell className="dark:text-gray-200">{row.phone}</TableCell>
+              <TableCell className="dark:text-gray-200">{new Date(row.startDate).toLocaleString("en-uk", {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+              })}</TableCell>
+              <TableCell className="dark:text-gray-200">{new Date(row.endDate).toLocaleString("en-uk", {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+              })}</TableCell>
+              <TableCell className="dark:text-gray-200">{row.paymentReference ? row.paymentReference : 'Cash' }</TableCell>
+              <TableCell className="dark:text-gray-200">{row.roomTitle}</TableCell>
+              <TableCell className="dark:text-gray-200">{row.roomNumbers.length >1 ? row.roomNumbers.map((roomNumber) => `${roomNumber}, `): row.roomNumbers.map((roomNumber) => `${roomNumber}`)}</TableCell>
+              
               <TableCell className="dark:text-gray-200">
-                <div className="flex items-center">
-                  <img src={row.img} alt="" className="w-8 h-8 rounded-full mr-5 object-cover" />
-                  {row.product}
-                </div>
-              </TableCell>
-              <TableCell className="dark:text-gray-200">{row.customer}</TableCell>
-              <TableCell className="dark:text-gray-200">{row.date}</TableCell>
-              <TableCell className="dark:text-gray-200">{row.amount}</TableCell>
-              <TableCell className="dark:text-gray-200">{row.method}</TableCell>
-              <TableCell className="dark:text-gray-200">
-                <span className={`p-2 rounded-md ${ row.status === 'Approved' ? 'bg-green-300 text-green-800' : 'bg-emerald-50 text-amber-500' }`}>{row.status}</span>
+              <Link 
+                  to={`/bookings/${row._id}`} 
+                  style={{ textDecoration: "none" }}
+                  state = {{ data: row}}
+                  >
+                  <div className="py-1 px-2 text-blue-700 border-1 border-dotted border-blue-800 cursor-pointer">View</div>
+              </Link>
               </TableCell>
             </TableRow>
           ))}

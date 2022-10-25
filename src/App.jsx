@@ -31,6 +31,13 @@ const App = () => {
         <Routes>
             <Route path="/">
                 <Route path="login" element={<Login />} />
+                <Route path='dashboard' element = { 
+                    user ? (
+                        <AppWrap>
+                            <Home />
+                        </AppWrap>
+                    ): (<Navigate to='/login' />)
+                } />
                 <Route index element={
                     user ? (
                         <AppWrap>

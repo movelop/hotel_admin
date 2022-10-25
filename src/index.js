@@ -10,7 +10,6 @@ import './index.css';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-    <React.StrictMode>
         <ContextProvider>
             <AuthContextProvider>
                 <Router>
@@ -18,5 +17,4 @@ root.render(
                 </Router>
             </AuthContextProvider>
         </ContextProvider>
-    </React.StrictMode>
 )

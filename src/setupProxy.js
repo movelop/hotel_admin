@@ -4,7 +4,7 @@ module.exports = function(app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'https://heritage-resorts.herokuapp.com',
+      target: 'https://dczars-api.herokuapp.com',
       // target: 'http://localhost:4000',
       changeOrigin: true,
     })
